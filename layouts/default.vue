@@ -7,7 +7,7 @@
   </div>
 </template>
 <script>
-import Topbar from "@/components/TheHeader/TheHeader";
+import Topbar from "@/components/Toolbar";
 export default {
   data() {
     return {};

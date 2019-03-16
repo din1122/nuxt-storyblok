@@ -1,12 +1,11 @@
 <template>
-    <nuxt-link :to="'/blog/' + id"
+    <a :href='VideoUrl'
     >
-      <v-card elevation="4" max-height="800" height="700">
-      <v-img :src="thumbnailImage" aspect-ratio="1" ></v-img>
+      <v-card elevation="4" class="VideoCard">
+      <v-img :src="thumbnail" aspect-ratio="1"  ></v-img>
        <v-card-title primary-title  >
           <div>
-                <h1>{{title}}</h1>
-                <p>{{excert}}</p>
+                <h1>{{VideoTitle}}</h1>
           </div>  
         </v-card-title>
         <!--
@@ -16,7 +15,7 @@
           </div>
           -->
       </v-card>
-    </nuxt-link>
+    </a>
 </template>
 
 <script>
@@ -26,11 +25,11 @@
         type: String,
         required: true
       },
-      excert: {
+      videolink: {
         type: String,
         required: true
       },
-      thumbnailImage: {
+      thumbnail: {
         type: String,
         required: true
       },
@@ -38,6 +37,22 @@
         type: String,
         required: true
       }
+    },
+    data(){
+        return{
+            VideoUrl:'',
+            VideoTitle:''
+        }
+    },
+    created(){
+            //url
+    const str = this.$props.videolink
+    const URL = str.replace('/f/', '/embed/');
+     this.VideoUrl = URL;
+
+    const strt = this.$props.title
+const title = strt.replace(/_/g, ' ');
+   this.VideoTitle = title
     }
   }
 
@@ -71,10 +86,12 @@
   p{
     padding:1rem;
   }
-
-  @media (min-width:35rem) {
-    .post-preview {
-      width: 25rem;
+    .VideoCard{
+    height:750px;
+    }
+  @media (max-width:40rem) {
+     .VideoCard{
+    height:unset;
     }
   }
 

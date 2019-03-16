@@ -1,8 +1,8 @@
 {
-  "name": "vue-nuxt-storyblok-boilerplate",
+  "name": "Amsr-adult",
   "version": "1.0.0",
-  "description": "Nuxt.js Storyblok Boilerplate",
-  "author": "Alexander Feiglstorfer <delooks@gmail.com>",
+  "description": "promoting Amsr adult porn blog and tube site",
+  "author": "unkonwn",
   "private": true,
   "scripts": {
     "dev": "nuxt",
@@ -11,6 +11,7 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@nuxtjs/vuetify": "^0.5.5",
     "cross-env": "^5.2.0",
     "nuxt": "^2.0.0",
     "storyblok-nuxt": "1.0.0"

@@ -1,43 +1,48 @@
 <template>
-  <section id="posts">
-   <PostPreview v-for="post in posts" :key="post.id" 
-   :title="post.title"
-   :id="post.id"
-   :excert="post.previewText"
-   :image="post.thumbnail"
-   />
-  </section>
+<v-container>
+<v-layout row wrap>
+<v-flex v-for="item in posts" xl3 md3 sm12 :key="item.id">
+<ModelProfile :catergory="item.catergory" :title="item.title" :summary="item.summary" :age="item.age" :profileimage="item.image" :id="item.id"/>
+</v-flex>
+</v-layout>
+</v-container>  
+
 </template>
 
 <script>
-import PostPreview from '@/components/Blog/PostPreview';
+import ModelProfile from '@/components/ModelProfile';
   export default {
      data() {
        return {
+           posts:[]
        }
      },
     asyncData(context){
       return context.app.$storyapi.get('cdn/stories',{
        version: process.env.NODE_ENV == 'production' ? 'published' : 'draft',
-        starts_with:'blog/'
-          
+        starts_with:'models/',
       }).then(res => {
-      console.log(res.data);
+          console.log(res.data)
         return {
         posts: res.data.stories.map(bp =>{
           return{
-            id:bp.slug,
             title:bp.content.title,
             summary:bp.content.summary,
-            image:bp.content.thumbnail
+            image:bp.content.Profile,
+            id:bp.slug,
+            age:bp.content.Age,
+            catergory:bp.content.catergory[0]
+            
           }
         })
         }
       })
-
     },
     components:{
-      PostPreview
+      ModelProfile
+    },
+    created(){
+        console.log(this.posts)
     }
   };
 

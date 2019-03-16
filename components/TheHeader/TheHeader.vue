@@ -4,6 +4,7 @@
         <ul class="nav-links">
         <nuxt-link to="/blog" tag="li" class="nav-link" ><a>All Posts</a></nuxt-link>
         <nuxt-link to="/about" tag="li" class="nav-link"><a>About</a></nuxt-link>
+        <nuxt-link to="/models" tag="li" class="nav-link"><a>Models</a></nuxt-link>
         </ul>
     </nav>
     </header>
@@ -26,7 +27,6 @@ align-items:center;
 height:100%;
 }
 .main-header{
-    position:fixed;
     top:0;
     left:0;
     width:100%;

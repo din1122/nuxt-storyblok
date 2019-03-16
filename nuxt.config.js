@@ -7,6 +7,7 @@ module.exports = {
    ** Headers of the page
    */
   head: {
+
     title: pkg.name,
     meta: [{
         charset: 'utf-8'
@@ -25,7 +26,7 @@ module.exports = {
       rel: 'icon',
       type: 'image/x-icon',
       href: '/favicon.ico'
-    }]
+    }, ]
   },
 
   /*
@@ -45,30 +46,40 @@ module.exports = {
    */
   plugins: [
     '~/plugins/components',
-    '~/plugins/filters'
+    '~/plugins/filters',
+
   ],
 
   /*
    ** Nuxt.js modules
    */
   modules: [
-    ['storyblok-nuxt', {
-      accessToken: process.env.NODE_ENV == 'production' ? '7qHGKJxaGEWvTGrg9fUAgwtt' : 'moS7iRLxjDiEC9ZoVMiEvgtt',
-      cacheProvider: 'memory'
-    }]
+
+    [
+      'storyblok-nuxt', {
+        accessToken: process.env.NODE_ENV == 'production' ? '7qHGKJxaGEWvTGrg9fUAgwtt' : 'moS7iRLxjDiEC9ZoVMiEvgtt',
+        cacheProvider: 'memory'
+      }
+    ],
+    [
+      '@nuxtjs/vuetify'
+    ]
   ],
   generate: {
-    routes: [function () {
-      return axios.get('https://api.storyblok.com/v1/cdn/stories?&version=published&token=7qHGKJxaGEWvTGrg9fUAgwtt&start_with=blog&cv=' + Math.floor(Date.now() / 1e3), ).then(res => {
-        const blogPosts = res.data.stories.map(bp => bp.full_slug);
-        return [
-          '/',
-          '/blog',
-          '/about',
-          ...blogPosts
-        ]
-      })
-    }]
+    routes: function () {
+      return axios.get("https://api.storyblok.com/v1/cdn/stories?&version=published&token=moS7iRLxjDiEC9ZoVMiEvgtt&cv=" +
+          Math.floor(Date.now() / 1e3)
+        )
+        .then(res => {
+          const blogPosts = res.data.stories.map(bp => bp.full_slug);
+          return [
+            '/',
+            '/blog',
+            '/about',
+            ...blogPosts
+          ]
+        })
+    }
   },
 
   /*
@@ -83,8 +94,7 @@ module.exports = {
    */
   build: {
     /*
-     ** You can extend webpack config here
-     */
+     You can extend webpack config here */
     extend(config, ctx) {
 
     }
